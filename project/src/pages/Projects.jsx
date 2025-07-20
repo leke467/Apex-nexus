@@ -11,7 +11,7 @@ const projects = [
     tags: ['Gaming', 'Community', 'Tournament'],
     image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg',
     description: 'A comprehensive gaming community platform and tournament management system.',
-    link: '/projects'
+    link: 'https://battlegridapp.netlify.app/'
   },
   {
     id: 2,
