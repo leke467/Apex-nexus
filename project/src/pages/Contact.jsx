@@ -280,7 +280,7 @@ function Contact() {
               <FiMapPin className="text-3xl" />
             </div>
             <h3 className="text-xl font-semibold mb-2">Our Location</h3>
-            <p className="text-white/70">123 Tech Street, Nexus Park, Innovation City, 12345</p>
+            <p className="text-white/70">ikeja lagos</p>
           </div>
         </div>
       </section>
