@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom';
 const projects = [
   {
     id: 1,
-    title: 'Apex Grid',
+    title: 'Battle Grid',
     category: 'Esports',
     tags: ['Gaming', 'Community', 'Tournament'],
     image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg',
-    description: 'A comprehensive gaming community platform and tournament management system that connects players, organizes competitions, and tracks performance metrics.',
-    link: '#'
+    description: 'A comprehensive gaming community platform and tournament management system.',
+    link: '/projects'
   },
   {
     id: 2,
@@ -19,8 +19,8 @@ const projects = [
     category: 'Food Tech',
     tags: ['Food', 'E-commerce', 'Delivery'],
     image: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg',
-    description: 'An innovative food and snacks delivery platform that uses AI to recommend personalized selections based on taste preferences and dietary requirements.',
-    link: '#'
+    description: 'Innovative food and snacks delivery platform with unique taste profiles.',
+    link: 'https://honeyspicy.netlify.app/'
   },
   {
     id: 3,
@@ -28,35 +28,26 @@ const projects = [
     category: 'AgriTech',
     tags: ['Farming', 'IoT', 'Analytics'],
     image: 'https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg',
-    description: 'Advanced farm management system utilizing IoT sensors, AI analytics, and automation to optimize crop yields and resource utilization for sustainable farming.',
-    link: '#'
+    description: 'Advanced farm management system utilizing IoT and AI for optimal crop yields.',
+    link: '/projects'
   },
   {
     id: 4,
-    title: 'NexusPay',
-    category: 'FinTech',
-    tags: ['Payments', 'Security', 'Blockchain'],
+    title: 'EduPortal',
+    category: 'Education',
+    tags: ['Learning', 'Management', 'Portal'],
     image: 'https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg',
-    description: 'Secure and seamless payment solution using blockchain technology to facilitate fast, encrypted transactions across multiple currencies and platforms.',
-    link: '#'
+    description: 'Centralized school management portal with student, teacher and parent access.',
+    link: '/projects'
   },
   {
     id: 5,
-    title: 'StreamVerse',
-    category: 'Media',
-    tags: ['Streaming', 'Content', 'Social'],
+    title: 'MarketMingle',
+    category: 'E-commerce',
+    tags: ['Marketplace', 'Shopping', 'Local'],
     image: 'https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg',
-    description: 'Interactive streaming platform for gamers and content creators featuring integrated chat, monetization tools, and AI-enhanced content recommendations.',
-    link: '#'
-  },
-  {
-    id: 6,
-    title: 'EcoTrack',
-    category: 'CleanTech',
-    tags: ['Sustainability', 'IoT', 'Analytics'],
-    image: 'https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg',
-    description: 'Environmental monitoring system that uses distributed sensors to track air quality, water purity, and other ecological metrics for cities and communities.',
-    link: '#'
+    description: 'A vibrant digital marketplace connecting local artisans, craftspeople and sellers directly with buyers through personalized storefronts and interactive shopping experiences.',
+    link: '/projects'
   }
 ];
 
@@ -205,9 +196,14 @@ function Projects() {
               viewport={{ once: true }}
             >
               <h2 className="mb-6">Have a Project in <span className="text-gradient">Mind?</span></h2>
-              <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-                We're always excited to take on new challenges and create innovative solutions. Let's work together to bring your vision to life.
-              </p>
+              <motion.p
+  className="text-xl md:text-lg sm:text-base text-white/90 mb-10 max-w-2xl mx-auto"
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.2 }}
+>
+  We're always excited to take on new challenges and create innovative solutions. Let's work together to bring your vision to life.
+</motion.p>
               
               <Link to="/contact" className="btn btn-primary">
                 Get in Touch

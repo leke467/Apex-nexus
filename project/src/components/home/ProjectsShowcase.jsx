@@ -14,7 +14,7 @@ import 'swiper/css/navigation';
 const projects = [
   {
     id: 1,
-    title: 'Apex Grid',
+    title: 'Battle Grid',
     description: 'A comprehensive gaming community platform and tournament management system.',
     image: 'https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg',
     category: 'Esports',
@@ -38,18 +38,18 @@ const projects = [
   },
   {
     id: 4,
-    title: 'NexusPay',
-    description: 'Secure and seamless payment solution for digital transactions.',
+    title: 'EduPortal',
+    description: 'Centralized school management portal with student, teacher and parent access.',
     image: 'https://images.pexels.com/photos/164527/pexels-photo-164527.jpeg',
-    category: 'FinTech',
+    category: 'Education',
     link: '/projects',
   },
   {
     id: 5,
-    title: 'StreamVerse',
-    description: 'Interactive streaming platform for gamers and content creators.',
+    title: 'MarketMingle',
+    description: 'A vibrant digital marketplace connecting local artisans, craftspeople and sellers directly with buyers through personalized storefronts and interactive shopping experiences.',
     image: 'https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg',
-    category: 'Media',
+    category: 'E-commerce',
     link: '/projects',
   },
 ];

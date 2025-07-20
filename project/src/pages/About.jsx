@@ -1,37 +1,43 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { useInView } from 'framer-motion';
 import { FiUsers, FiTarget, FiAward, FiTrendingUp } from 'react-icons/fi';
+import personJpeg from '../assets/person.jpeg';
 
 function About() {
   const teamRef = useRef(null);
   const teamInView = useInView(teamRef, { once: true, amount: 0.2 });
-
   const teamMembers = [
     {
-      name: 'Alex Johnson',
+      name: 'Adeleke Adebayo',
       role: 'Founder & CEO',
-      image: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg',
+      image: personJpeg,
       bio: 'Visionary leader with 15+ years in tech innovation.'
     },
+
     {
-      name: 'Sarah Chen',
+      name: 'Adeniyi fajemisin',
       role: 'CTO',
-      image: 'https://images.pexels.com/photos/3796217/pexels-photo-3796217.jpeg',
+      image: personJpeg,
       bio: 'Pioneering technologist specializing in AI and emerging tech.'
     },
     {
-      name: 'James Wilson',
+      name: 'Gbolagade Ridwan',
       role: 'Design Director',
-      image: 'https://images.pexels.com/photos/3778680/pexels-photo-3778680.jpeg',
+      image: personJpeg,
       bio: 'Award-winning UX/UI expert with a passion for user-centered design.'
     },
     {
-      name: 'Maria Rodriguez',
-      role: 'Head of Operations',
-      image: 'https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg',
+      name: 'Ibrahim Olawale',
+      role: 'Software Engineer',
+      image: personJpeg,
       bio: 'Operational strategist with expertise in scaling tech ventures.'
-    }
+    },
+    {
+      name: 'Oloruntade Idris',
+      role: 'Marketer',
+      image: personJpeg,
+      bio: 'Award-winning UX/UI expert with a passion for user-centered design.'
+    },
   ];
 
   const values = [

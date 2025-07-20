@@ -122,9 +122,9 @@ function Contact() {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Call Us</h3>
                     <p className="text-white/70 mb-1">Main Office:</p>
-                    <p className="text-primary-400">+1 (555) 123-4567</p>
+                    <p className="text-primary-400">+2349032459336</p>
                     <p className="text-white/70 mb-1 mt-3">Customer Support:</p>
-                    <p className="text-primary-400">+1 (555) 765-4321</p>
+                    <p className="text-primary-400">+2349032459336</p>
                   </div>
                 </div>
                 
@@ -135,8 +135,8 @@ function Contact() {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Visit Us</h3>
                     <p className="text-white/70 mb-1">Headquarters:</p>
-                    <p className="text-primary-400">123 Tech Street</p>
-                    <p className="text-primary-400">Nexus Park, Innovation City, 12345</p>
+                    <p className="text-primary-400">No 33 Nurrudeen Street</p>
+                    <p className="text-primary-400">Olayemi Bustup Ayobo Lagos</p>
                   </div>
                 </div>
               </div>

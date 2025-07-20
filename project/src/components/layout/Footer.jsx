@@ -63,9 +63,10 @@ function Footer() {
           <div>
             <h4 className="text-lg font-display font-semibold mb-4 text-white">Our Projects</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Apex Grid</a></li>
+              <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Battle Grid</a></li>
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Honey Spicy</a></li>
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Terraflow</a></li>
+              <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Ade-hi Farm</a></li>
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Innovation Lab</a></li>
             </ul>
           </div>
@@ -74,10 +75,10 @@ function Footer() {
           <div>
             <h4 className="text-lg font-display font-semibold mb-4 text-white">Contact Us</h4>
             <ul className="space-y-2">
-              <li className="text-white/70">123 Tech Street</li>
-              <li className="text-white/70">Nexus Park, Innovation City</li>
+              <li className="text-white/70">No 33 Nurrudeen Street</li>
+              <li className="text-white/70"> Olayemi Bustup Ayobo Lagos. </li>
               <li className="text-white/70">hello@apexnexus.com</li>
-              <li className="text-white/70">+1 (555) 123-4567</li>
+              <li className="text-white/70">+2349032459336</li>
             </ul>
           </div>
         </div>
