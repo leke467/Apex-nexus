@@ -79,9 +79,9 @@ function Navbar() {
             aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           >
             {darkMode ? (
-              <FiMoon className="text-xl text-blue-400" />
-            ) : (
               <FiSun className="text-xl text-yellow-400" />
+            ) : (
+              <FiMoon className="text-xl text-blue-400" />
             )}
           </button>
         </div>
@@ -94,9 +94,9 @@ function Navbar() {
             aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           >
             {darkMode ? (
-              <FiMoon className="text-xl text-blue-400" />
-            ) : (
               <FiSun className="text-xl text-yellow-400" />
+            ) : (
+              <FiMoon className="text-xl text-blue-400" />
             )}
           </button>
           
