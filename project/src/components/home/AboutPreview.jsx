@@ -86,9 +86,9 @@ function AboutPreview() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h2 className="mb-6">About <span className="text-gradient">Apex Nexus</span></h2>
+            <h2 className="mb-6">About <span className="text-gradient">Apex Labs</span></h2>
             <p className="text-lg text-white/80 mb-6">
-              Apex Nexus Ltd is a pioneering tech startup at the forefront of innovation, creating solutions that address real-world challenges while pushing the boundaries of what's possible.
+              Apex Labs Ltd is a pioneering tech startup at the forefront of innovation, creating solutions that address real-world challenges while pushing the boundaries of what's possible.
             </p>
             <p className="text-lg text-white/80 mb-8">
               Founded with a vision to bridge technology and human needs, we specialize in developing cutting-edge applications, immersive digital experiences, and transformative platforms across multiple industries.

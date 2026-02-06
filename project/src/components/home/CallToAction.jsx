@@ -20,7 +20,7 @@ function CallToAction() {
           >
             <h2 className="mb-6">Ready to <span className="text-gradient">Transform</span> Your Ideas?</h2>
             <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-              Partner with Apex Nexus Ltd to bring your vision to life. Our team of experts is ready to turn your concept into reality with cutting-edge technology and innovative solutions.
+              Partner with Apex Labs Ltd to bring your vision to life. Our team of experts is ready to turn your concept into reality with cutting-edge technology and innovative solutions.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -55,7 +55,7 @@ function Navbar() {
               <path d="M30 9V23L16 30V16L30 9Z" fill="#0B132B"/>
             </svg>
           </div>
-          <span className="font-display font-bold text-xl tracking-wider text-white">APEX NEXUS</span>
+          <span className="font-display font-bold text-xl tracking-wider text-white">APEX LABS</span>
         </NavLink>
 
         {/* Desktop Navigation */}

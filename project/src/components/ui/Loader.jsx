@@ -41,7 +41,7 @@ function Loader() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          APEX NEXUS
+          APEX LABS
         </motion.h2>
         
         <div className="flex space-x-2">

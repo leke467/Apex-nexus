@@ -100,7 +100,7 @@ function About() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              About <span className="text-gradient">Apex Nexus</span>
+              About <span className="text-gradient">Apex Labs</span>
             </motion.h1>
             <motion.p 
               className="text-xl text-white/80 mb-8"
@@ -129,7 +129,7 @@ function About() {
             >
               <h2 className="mb-6">Our <span className="text-gradient">Story</span></h2>
               <p className="text-lg text-white/80 mb-6">
-                Founded in 2020, Apex Nexus emerged from a simple vision: to create technology that makes a difference. What began as a small team of passionate innovators has grown into a dynamic company at the forefront of digital transformation.
+                Founded in 2020, Apex Labs emerged from a simple vision: to create technology that makes a difference. What began as a small team of passionate innovators has grown into a dynamic company at the forefront of digital transformation.
               </p>
               <p className="text-lg text-white/80 mb-6">
                 Our journey has been defined by a relentless pursuit of excellence, constantly pushing the boundaries of what's possible in tech innovation, media content creation, esports, and problem-solving solutions.
@@ -183,7 +183,7 @@ function About() {
           >
             <h2 className="mb-4">Our <span className="text-gradient">Values</span></h2>
             <p className="max-w-2xl mx-auto text-lg text-white/80">
-              These core principles guide our work and define our culture at Apex Nexus.
+              These core principles guide our work and define our culture at Apex Labs.
             </p>
           </motion.div>
 
@@ -222,7 +222,7 @@ function About() {
           >
             <h2 className="mb-4">Our <span className="text-gradient">Team</span></h2>
             <p className="max-w-2xl mx-auto text-lg text-white/80">
-              Meet the talented individuals behind Apex Nexus who bring our vision to life.
+              Meet the talented individuals behind Apex Labs who bring our vision to life.
             </p>
           </motion.div>
 

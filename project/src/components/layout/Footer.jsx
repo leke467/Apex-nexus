@@ -26,7 +26,7 @@ function Footer() {
                 <path d="M2 9V23L16 30V16L2 9Z" fill="#5BC0BE"/>
                 <path d="M30 9V23L16 30V16L30 9Z" fill="#0B132B"/>
               </svg>
-              <span className="font-display font-bold text-xl tracking-wider text-white">APEX NEXUS</span>
+              <span className="font-display font-bold text-xl tracking-wider text-white">APEX LABS</span>
             </div>
             <p className="text-white/70">
               Pioneering technological innovations and solutions for a better future.
@@ -77,7 +77,7 @@ function Footer() {
             <ul className="space-y-2">
               <li className="text-white/70">No 33 Nurrudeen Street</li>
               <li className="text-white/70"> Olayemi Bustup Ayobo Lagos. </li>
-              <li className="text-white/70">hello@apexnexus.com</li>
+              <li className="text-white/70">hello@apexlabs.com</li>
               <li className="text-white/70">+2349032459336</li>
             </ul>
           </div>
@@ -86,7 +86,7 @@ function Footer() {
         {/* Bottom section */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/50 text-center md:text-left">
-            &copy; {new Date().getFullYear()} Apex Nexus Ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} Apex Labs Ltd. All rights reserved.
           </p>
           
           <div className="mt-4 md:mt-0 flex space-x-6">

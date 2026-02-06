@@ -109,9 +109,9 @@ function Contact() {
                   <div>
                     <h3 className="text-xl font-semibold mb-2">Email Us</h3>
                     <p className="text-white/70 mb-1">General Inquiries:</p>
-                    <p className="text-primary-400">hello@apexnexus.com</p>
+                    <p className="text-primary-400">hello@apexlabs.com</p>
                     <p className="text-white/70 mb-1 mt-3">Support:</p>
-                    <p className="text-primary-400">support@apexnexus.com</p>
+                    <p className="text-primary-400">support@apexlabs.com</p>
                   </div>
                 </div>
                 
@@ -261,7 +261,7 @@ function Contact() {
                 </h3>
                 <p className="text-white/70 mb-4">
                   For project estimates or detailed service quotes, please fill out the form above with specifics about your needs, or contact us directly at 
-                  <a href="mailto:quotes@apexnexus.com" className="text-primary-400 hover:text-primary-300 ml-1">quotes@apexnexus.com</a>
+                  <a href="mailto:quotes@apexlabs.com" className="text-primary-400 hover:text-primary-300 ml-1">quotes@apexlabs.com</a>
                 </p>
               </div>
             </motion.div>
