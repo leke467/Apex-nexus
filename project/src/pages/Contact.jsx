@@ -111,7 +111,7 @@ function Contact() {
                     <p className="text-white/70 mb-1">General Inquiries:</p>
                     <p className="text-primary-400">hello@apexlabs.com</p>
                     <p className="text-white/70 mb-1 mt-3">Support:</p>
-                    <p className="text-primary-400">support@apexlabs.com</p>
+                    <p className="text-primary-400">support@apexlabs.it.com</p>
                   </div>
                 </div>
                 

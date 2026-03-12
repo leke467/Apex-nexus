@@ -11,32 +11,32 @@ function About() {
       name: 'Adeleke Adebayo',
       role: 'Founder & CEO',
       image: personJpeg,
-      bio: 'Visionary leader with 15+ years in tech innovation.'
+      bio: 'Experienced leader with over 15 years building successful technology products.'
     },
 
     {
       name: 'Adeniyi fajemisin',
       role: 'CTO',
       image: personJpeg,
-      bio: 'Pioneering technologist specializing in AI and emerging tech.'
+      bio: 'Technical architect with expertise in building scalable, high-performance systems.'
     },
     {
       name: 'Gbolagade Ridwan',
       role: 'Design Director',
       image: personJpeg,
-      bio: 'Award-winning UX/UI expert with a passion for user-centered design.'
+      bio: 'UX/UI specialist focused on creating intuitive, user-centered digital experiences.'
     },
     {
       name: 'Ibrahim Olawale',
       role: 'Software Engineer',
       image: personJpeg,
-      bio: 'Operational strategist with expertise in scaling tech ventures.'
+      bio: 'Full-stack developer passionate about writing clean, maintainable code.'
     },
     {
       name: 'Oloruntade Idris',
       role: 'Marketer',
       image: personJpeg,
-      bio: 'Award-winning UX/UI expert with a passion for user-centered design.'
+      bio: 'Strategic thinker who connects technical solutions with market needs.'
     },
   ];
 
@@ -108,8 +108,8 @@ function About() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Pioneering the future through innovative technology solutions and 
-              pushing the boundaries of what's possible.
+              Building practical, effective technology solutions that help businesses 
+              grow and succeed in the modern digital landscape.
             </motion.p>
           </div>
         </div>

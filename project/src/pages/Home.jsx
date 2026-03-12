@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
 import HeroSection from '../components/home/HeroSection';
 import ServicesSection from '../components/home/ServicesSection';
 import ProjectsShowcase from '../components/home/ProjectsShowcase';
@@ -6,6 +8,13 @@ import AboutPreview from '../components/home/AboutPreview';
 import CallToAction from '../components/home/CallToAction';
 
 function Home() {
+  const { setDarkMode } = useTheme();
+
+  useEffect(() => {
+    // Randomly switch between light and dark mode every time the home page loads
+    setDarkMode(Math.random() > 0.5);
+  }, [setDarkMode]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

@@ -86,7 +86,7 @@ function Footer() {
         {/* Bottom section */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/50 text-center md:text-left">
-            &copy; {new Date().getFullYear()} Apex Labs Ltd. All rights reserved.
+            &copy; {new Date().getFullYear()} Apex Labs Global Resources Limited. All rights reserved.
           </p>
           
           <div className="mt-4 md:mt-0 flex space-x-6">

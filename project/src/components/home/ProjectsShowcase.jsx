@@ -71,7 +71,7 @@ function ProjectsShowcase() {
         >
           <h2 className="mb-4">Our <span className="text-gradient">Projects</span></h2>
           <p className="max-w-2xl mx-auto text-lg text-white/80">
-            Explore our innovative projects that are transforming industries and creating new possibilities.
+            Explore our recent work spanning across multiple industries, from esports to education.
           </p>
         </motion.div>
 

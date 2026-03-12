@@ -63,8 +63,8 @@ function AboutPreview() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="font-bold text-white">Innovation First</h4>
-                  <p className="text-sm text-white/70">Building the future through continuous innovation</p>
+                  <h4 className="font-bold text-white">Practical Solutions</h4>
+                  <p className="text-sm text-white/70">Building reliable software for real-world needs</p>
                 </div>
               </div>
             </motion.div>
@@ -88,10 +88,10 @@ function AboutPreview() {
           >
             <h2 className="mb-6">About <span className="text-gradient">Apex Labs</span></h2>
             <p className="text-lg text-white/80 mb-6">
-              Apex Labs Ltd is a pioneering tech startup at the forefront of innovation, creating solutions that address real-world challenges while pushing the boundaries of what's possible.
+              Apex Labs is a digital agency focused on creating robust software solutions that address real-world business challenges and operational needs.
             </p>
             <p className="text-lg text-white/80 mb-8">
-              Founded with a vision to bridge technology and human needs, we specialize in developing cutting-edge applications, immersive digital experiences, and transformative platforms across multiple industries.
+              Founded with a vision to build technology that simply works, we specialize in developing reliable web applications, straightforward digital experiences, and scalable platforms across multiple industries.
             </p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -101,7 +101,7 @@ function AboutPreview() {
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </div>
-                <p className="text-white/80">Innovative tech solutions</p>
+                <p className="text-white/80">Tailored software solutions</p>
               </div>
               <div className="flex items-start space-x-3">
                 <div className="w-6 h-6 rounded-full bg-primary-500 flex items-center justify-center flex-shrink-0 mt-1">
@@ -125,7 +125,7 @@ function AboutPreview() {
                     <polyline points="20 6 9 17 4 12"></polyline>
                   </svg>
                 </div>
-                <p className="text-white/80">Industry-leading research</p>
+                <p className="text-white/80">Reliable digital infrastructure</p>
               </div>
             </div>
             

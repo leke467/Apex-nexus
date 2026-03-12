@@ -71,7 +71,7 @@ function HeroSection() {
             className="text-center lg:text-left"
           >
             <h1 className="mb-6 leading-tight">
-              <span className="text-gradient glow-text">Innovating</span> Tomorrow's <span className="text-primary-400">Solutions</span>
+              Building <span className="text-primary-400">Practical</span> Digital Solutions
             </h1>
             <motion.p 
               className="text-xl md:text-2xl mb-8 text-white/80 max-w-lg mx-auto lg:mx-0"
@@ -79,7 +79,7 @@ function HeroSection() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Pioneering tech innovations that solve real-world problems and shape a better future.
+              Delivering reliable engineering and digital services that help modern businesses thrive.
             </motion.p>
             
             <motion.div 
@@ -133,9 +133,9 @@ function HeroSection() {
                   </svg>
                 </div>
               </div>
-              <div className="absolute left-12 top-0 -translate-y-1/2 px-4 py-2 bg-secondary-700/90 backdrop-blur-sm rounded-full text-sm font-medium">Innovative</div>
-              <div className="absolute right-0 top-1/3 translate-x-1/2 px-4 py-2 bg-primary-600/90 backdrop-blur-sm rounded-full text-sm font-medium">Cutting-edge</div>
-              <div className="absolute bottom-0 left-1/4 translate-y-1/2 px-4 py-2 bg-secondary-500/90 backdrop-blur-sm rounded-full text-sm font-medium">Future-focused</div>
+              <div className="absolute left-12 top-0 -translate-y-1/2 px-4 py-2 bg-secondary-700/90 backdrop-blur-sm rounded-full text-sm font-medium">Reliable</div>
+              <div className="absolute right-0 top-1/3 translate-x-1/2 px-4 py-2 bg-primary-600/90 backdrop-blur-sm rounded-full text-sm font-medium">Scalable</div>
+              <div className="absolute bottom-0 left-1/4 translate-y-1/2 px-4 py-2 bg-secondary-500/90 backdrop-blur-sm rounded-full text-sm font-medium">Secure</div>
             </div>
             
             {/* Glowing orbs */}

@@ -33,8 +33,8 @@ function Vision() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Pioneering a future where technology seamlessly enhances human experiences
-              and solves our most pressing challenges.
+              Building reliable digital platforms that solve real business challenges 
+              and deliver measurable results.
             </motion.p>
           </div>
         </div>
@@ -59,10 +59,10 @@ function Vision() {
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">Our Vision</h2>
               <p className="text-lg text-white/80 mb-6">
-                To be at the forefront of technological innovation, creating solutions that transform industries, enhance human experiences, and address global challenges.
+                To be a trusted partner in digital transformation, creating robust software solutions that help our clients operate more efficiently and serve their customers better.
               </p>
               <p className="text-lg text-white/80">
-                We envision a world where technology is accessible, ethical, and empowering – breaking barriers and creating new possibilities for everyone.
+                We envision a tech landscape where tools are straightforward, dependable, and built with the explicit goal of generating practical value.
               </p>
             </motion.div>
             
@@ -79,10 +79,10 @@ function Vision() {
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-6">Our Mission</h2>
               <p className="text-lg text-white/80 mb-6">
-                To develop innovative, user-centered technological solutions that solve real-world problems and create meaningful impact across diverse industries and communities.
+                To deliver high-quality, reliable software engineering and media services that directly address our clients' operational needs and strategic objectives.
               </p>
               <p className="text-lg text-white/80">
-                We commit to excellence in every project, fostering collaboration, continuous learning, and ethical practices that build trust and drive sustainable growth.
+                We commit to a practical approach in every project, emphasizing clear communication, solid architecture, and delivering software that truly works.
               </p>
             </motion.div>
           </div>
@@ -109,23 +109,23 @@ function Vision() {
             {[
               {
                 icon: <FiUsers className="text-3xl" />,
-                title: 'Human-Centered Innovation',
-                description: 'We design technology that puts human needs and experiences at the center, creating solutions that are intuitive, accessible, and empowering.',
+                title: 'User-Focused Design',
+                description: 'We build applications that are easy to use, ensuring that the software we create actually gets adopted and provides value from day one.',
               },
               {
                 icon: <FiGlobe className="text-3xl" />,
-                title: 'Ethical Technology',
-                description: 'We develop solutions with integrity and responsibility, considering the broader social impact and potential consequences of our innovations.',
+                title: 'Reliable Engineering',
+                description: 'We prioritize stability, security, and performance over chasing the newest frameworks, because predictable software is good business.',
               },
               {
                 icon: <FiTrendingUp className="text-3xl" />,
-                title: 'Continuous Learning',
-                description: 'We embrace a culture of perpetual growth, staying at the forefront of technological advancements and constantly expanding our expertise.',
+                title: 'Pragmatic Solutions',
+                description: 'We focus on practical problem solving rather than over-engineering, choosing the right tools to get the job done effectively.',
               },
               {
                 icon: <FiTarget className="text-3xl" />,
-                title: 'Impact-Driven',
-                description: 'We measure our success by the positive change we create, focusing on solutions that address meaningful challenges and create lasting value.',
+                title: 'Business Alignment',
+                description: 'We measure our success by the tangible benefits our solutions provide to your bottom line and operational efficiency.',
               },
             ].map((value, index) => (
               <motion.div
@@ -171,42 +171,42 @@ function Vision() {
             {[
               {
                 year: '2025',
-                title: 'Expand Innovation Portfolio',
-                description: 'Develop and launch three groundbreaking technologies that address emerging market needs across our core sectors.',
+                title: 'Expand Service Offerings',
+                description: 'Broaden our core capabilities to deliver more comprehensive solutions across web development, media processing, and data management.',
                 highlights: [
-                  'Launch next-generation Apex Grid platform with advanced AI integration',
-                  'Expand Terraflow\'s capabilities to support urban farming',
-                  'Introduce revolutionary AR technology for immersive media experiences'
+                  'Launch dedicated esports tournament management tools',
+                  'Expand our media content delivery network capabilities',
+                  'Roll out advanced analytics dashboards for enterprise clients'
                 ]
               },
               {
                 year: '2026',
-                title: 'Scale Global Impact',
-                description: 'Extend our reach to international markets, making our solutions accessible to a more diverse range of users and industries.',
+                title: 'Scale Client Operations',
+                description: 'Increase our capacity to handle larger, more complex projects while maintaining our high standards for code quality and reliability.',
                 highlights: [
-                  'Establish strategic partnerships in Europe and Asia',
-                  'Localize platforms for regional markets',
-                  'Develop solutions for emerging economies'
+                  'Establish new regional support teams',
+                  'Automate QA and deployment pipelines for faster delivery',
+                  'Expand service integrations with major cloud providers'
                 ]
               },
               {
                 year: '2027',
-                title: 'Pioneer Sustainable Tech',
-                description: 'Lead the industry in developing carbon-neutral, resource-efficient technology solutions that address climate challenges.',
+                title: 'Open Source Leadership',
+                description: 'Contribute significantly to the tools and frameworks we rely on, giving back to the developer community that enables our work.',
                 highlights: [
-                  'Achieve carbon neutrality across all operations',
-                  'Launch ClimaTech innovation division',
-                  'Develop resource optimization platforms for enterprise clients'
+                  'Release our internal UI component library to open source',
+                  'Sponsor key infrastructure projects',
+                  'Publish standardized best practices for scalable architecture'
                 ]
               },
               {
                 year: '2028',
-                title: 'Transform Digital Experience',
-                description: 'Revolutionize how humans interact with technology through seamless, intuitive interfaces and personalized experiences.',
+                title: 'Platform Consolidation',
+                description: 'Unify our various service offerings into a cohesive, centralized management suite for our clients to manage their digital assets.',
                 highlights: [
-                  'Deploy next-generation human-computer interaction systems',
-                  'Launch cognitive computing platform',
-                  'Introduce adaptive learning technology across all platforms'
+                  'Deploy unified client portal and billing system',
+                  'Integrate cross-platform data reporting tools',
+                  'Streamline API access for all enterprise services'
                 ]
               }
             ].map((goal, index) => (

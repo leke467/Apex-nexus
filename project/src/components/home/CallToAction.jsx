@@ -18,9 +18,9 @@ function CallToAction() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="mb-6">Ready to <span className="text-gradient">Transform</span> Your Ideas?</h2>
+            <h2 className="mb-6">Ready to <span className="text-gradient">Build</span> Your Project?</h2>
             <p className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-              Partner with Apex Labs Ltd to bring your vision to life. Our team of experts is ready to turn your concept into reality with cutting-edge technology and innovative solutions.
+              Partner with Apex Labs to bring your vision to life. Our engineering and design teams are ready to turn your concept into a reliable digital solution.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

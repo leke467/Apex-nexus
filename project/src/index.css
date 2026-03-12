@@ -120,22 +120,22 @@
   @apply bg-primary-500;
 }
 
-/* Text gradient effect */
+/* Text gradient effect - simplified for professional aesthetic */
 .text-gradient {
-  background: linear-gradient(90deg, #1a82fc, #5BC0BE);
+  background: linear-gradient(90deg, #2563eb, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   text-fill-color: transparent;
 }
 
-/* Glow effects */
+/* Glow effects - disabled for professional aesthetic */
 .glow-text {
-  text-shadow: 0 0 10px rgba(26, 130, 252, 0.5), 0 0 20px rgba(26, 130, 252, 0.3);
+  text-shadow: none;
 }
 
 .glow-border {
-  box-shadow: 0 0 5px rgba(26, 130, 252, 0.5), 0 0 15px rgba(26, 130, 252, 0.2);
+  box-shadow: none;
 }
 
 /* Light mode overrides */
@@ -222,4 +222,5 @@ html.light .glass-panel {
 html.light .card {
   background-color: rgba(255, 255, 255, 0.9);
   border-color: rgba(15, 23, 42, 0.08);
+  background-image: none;
 }

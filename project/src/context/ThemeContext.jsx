@@ -29,7 +29,8 @@ export function ThemeProvider({ children }) {
 
   const value = {
     darkMode,
-    toggleDarkMode
+    toggleDarkMode,
+    setDarkMode
   };
 
   return (
