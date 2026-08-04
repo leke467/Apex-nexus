@@ -32,13 +32,6 @@ const services = [
     color: 'from-green-500 to-emerald-600',
   },
   {
-    id: 5,
-    title: 'Technical Consulting',
-    description: 'Providing expert guidance to help you navigate complex technical challenges and architecture decisions.',
-    icon: <FiTrendingUp className="text-4xl" />,
-    color: 'from-cyan-500 to-blue-600',
-  },
-  {
     id: 6,
     title: 'Digital Strategy',
     description: 'Helping businesses modernize their operations and leverage new technologies effectively.',
