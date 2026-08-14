@@ -65,7 +65,7 @@ function Footer() {
             <ul className="space-y-2">
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Battle Grid</a></li>
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Honey Spicy</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Terraflow</a></li>
+              <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Livesteads</a></li>
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Ade-hi Farm</a></li>
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Innovation Lab</a></li>
             </ul>

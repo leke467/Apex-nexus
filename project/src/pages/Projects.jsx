@@ -24,11 +24,11 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Terraflow',
+    title: 'Livesteads',
     category: 'AgriTech',
-    tags: ['Farming', 'IoT', 'Analytics'],
+    tags: ['Farming', 'Livestock', 'Analytics'],
     image: 'https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg',
-    description: 'Advanced farm management system utilizing IoT and AI for optimal crop yields.',
+    description: 'Advanced farm management system utilizing AI and unit economics for optimal agricultural yields.',
     link: '/projects'
   },
   {

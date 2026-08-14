@@ -30,8 +30,8 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Terraflow',
-    description: 'Advanced farm management system utilizing IoT and AI for optimal crop yields.',
+    title: 'Livesteads',
+    description: 'Advanced farm management system utilizing AI and unit economics for optimal agricultural yields.',
     image: 'https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg',
     category: 'AgriTech',
     link: '/projects',
