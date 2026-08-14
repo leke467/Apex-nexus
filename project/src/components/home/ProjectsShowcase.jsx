@@ -34,7 +34,7 @@ const projects = [
     description: 'Advanced farm management system utilizing AI and unit economics for optimal agricultural yields.',
     image: 'https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg',
     category: 'AgriTech',
-    link: '/projects',
+    link: 'https://livesteads.com/',
   },
   {
     id: 4,
