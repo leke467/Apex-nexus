@@ -46,11 +46,11 @@ const projects = [
   },
   {
     id: 5,
-    title: 'MarketMingle',
-    description: 'A vibrant digital marketplace connecting local artisans, craftspeople and sellers directly with buyers through personalized storefronts and interactive shopping experiences.',
-    image: 'https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg',
+    title: 'MultiShopNG',
+    description: 'Nigeria\'s premier multi-vendor e-commerce marketplace platform featuring 20 customizable store templates, seller dashboard, and 6-digit delivery escrow protection.',
+    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=1200&auto=format&fit=crop',
     category: 'E-commerce',
-    link: '/projects',
+    link: 'https://multishopng.com',
   },
 ];
 

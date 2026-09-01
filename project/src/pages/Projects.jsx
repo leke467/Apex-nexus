@@ -42,16 +42,16 @@ const projects = [
   },
   {
     id: 5,
-    title: 'MarketMingle',
+    title: 'MultiShopNG',
     category: 'E-commerce',
-    tags: ['Marketplace', 'Shopping', 'Local'],
-    image: 'https://images.pexels.com/photos/7915357/pexels-photo-7915357.jpeg',
-    description: 'A vibrant digital marketplace connecting local artisans, craftspeople and sellers directly with buyers through personalized storefronts and interactive shopping experiences.',
-    link: '/projects'
+    tags: ['Marketplace', 'E-commerce', 'Escrow', 'Templates'],
+    image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?q=80&w=1200&auto=format&fit=crop',
+    description: 'Nigeria\'s premier multi-vendor e-commerce marketplace platform featuring 20 customizable store templates, seller dashboard, and 6-digit delivery escrow protection.',
+    link: 'https://multishopng.com'
   }
 ];
 
-const categories = ['All', 'Esports', 'Food Tech', 'AgriTech', 'FinTech', 'Media', 'CleanTech'];
+const categories = ['All', 'E-commerce', 'Esports', 'Food Tech', 'AgriTech', 'Education', 'FinTech'];
 
 function Projects() {
   const [activeCategory, setActiveCategory] = useState('All');
