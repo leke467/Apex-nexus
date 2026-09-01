@@ -64,7 +64,7 @@ function Footer() {
             <h4 className="text-lg font-display font-semibold mb-4 text-white">Our Projects</h4>
             <ul className="space-y-2">
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Battle Grid</a></li>
-              <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Honey Spicy</a></li>
+              <li><a href="https://honey-spicy.adeleke467.workers.dev/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-primary-500 transition-colors">Honey Spicy</a></li>
               <li><a href="https://livesteads.com/" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-primary-500 transition-colors">Livesteads</a></li>
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Ade-hi Farm</a></li>
               <li><a href="#" className="text-white/70 hover:text-primary-500 transition-colors">Innovation Lab</a></li>

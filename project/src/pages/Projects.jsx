@@ -20,7 +20,7 @@ const projects = [
     tags: ['Food', 'E-commerce', 'Delivery'],
     image: 'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg',
     description: 'Innovative food and snacks delivery platform with unique taste profiles.',
-    link: 'https://honeyspicy.netlify.app/'
+    link: 'https://honey-spicy.adeleke467.workers.dev/'
   },
   {
     id: 3,
