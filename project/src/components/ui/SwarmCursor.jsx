@@ -802,16 +802,20 @@ const SwarmCursor = ({
         flock.targetY = clamp(flock.y + evadeUnitY * 380, 90, h - 90);
         flock.nextTargetTime = time + 1.8;
       } 
-      // 3. AMBIENT: CRUISE AND MOVE AROUND TOGETHER
+      // 3. AMBIENT: CRUISE AND MOVE AROUND TOGETHER DYNAMICALLY
       else {
-        if (time > flock.nextTargetTime) {
-          flock.nextTargetTime = time + 3.0 + Math.random() * 2.5;
+        const toTargetX = flock.targetX - flock.x;
+        const toTargetY = flock.targetY - flock.y;
+        const distTarget = Math.hypot(toTargetX, toTargetY) + 1e-4;
+
+        if (time > flock.nextTargetTime || distTarget < 75) {
+          flock.nextTargetTime = time + 1.4 + Math.random() * 1.6;
           const padX = Math.min(140, w * 0.15);
           const padY = Math.min(140, h * 0.15);
           let tx, ty;
           if (pointer.inside) {
-            const angle = Math.atan2(flock.y - mouseY, flock.x - mouseX) + (Math.random() - 0.5) * 1.4;
-            const dist = 220 + Math.random() * 280;
+            const angle = Math.atan2(flock.y - mouseY, flock.x - mouseX) + (Math.random() - 0.5) * 1.6;
+            const dist = 280 + Math.random() * 320;
             tx = clamp(flock.x + Math.cos(angle) * dist, padX, w - padX);
             ty = clamp(flock.y + Math.sin(angle) * dist, padY, h - padY);
           } else {
@@ -822,22 +826,25 @@ const SwarmCursor = ({
           flock.targetY = ty;
         }
 
-        const toTargetX = flock.targetX - flock.x;
-        const toTargetY = flock.targetY - flock.y;
-        const distTarget = Math.hypot(toTargetX, toTargetY) + 1e-4;
-        const cruiseSpeed = 160 * (0.5 + 0.5 * s.speed);
-        flock.vx += (toTargetX / distTarget) * Math.min(distTarget * 1.8, cruiseSpeed) * dt * 4;
-        flock.vy += (toTargetY / distTarget) * Math.min(distTarget * 1.8, cruiseSpeed) * dt * 4;
+        const cruiseSpeed = 260 * (0.5 + 0.5 * s.speed);
+        const steerStrength = 5.2;
+        flock.vx += (toTargetX / distTarget) * Math.min(distTarget * 2.2, cruiseSpeed) * dt * steerStrength;
+        flock.vy += (toTargetY / distTarget) * Math.min(distTarget * 2.2, cruiseSpeed) * dt * steerStrength;
+
+        // Continuous undulating wave motion so the flock swims gracefully and never stands still
+        const swimStrength = 200 * (0.6 + 0.4 * s.speed);
+        flock.vx += (Math.cos(time * 1.8) * 0.7 + Math.sin(time * 0.8) * 0.5) * swimStrength * dt;
+        flock.vy += (Math.sin(time * 1.6) * 0.7 + Math.cos(time * 0.9) * 0.5) * swimStrength * dt;
       }
 
       // Physics damping & integration
-      flock.vx *= Math.exp(-dt * 3.0);
-      flock.vy *= Math.exp(-dt * 3.0);
+      flock.vx *= Math.exp(-dt * 2.2);
+      flock.vy *= Math.exp(-dt * 2.2);
       flock.x = clamp(flock.x + flock.vx * dt, 70, w - 70);
       flock.y = clamp(flock.y + flock.vy * dt, 70, h - 70);
 
-      if (flock.x <= 75 || flock.x >= w - 75) flock.vx *= -0.5;
-      if (flock.y <= 75 || flock.y >= h - 75) flock.vy *= -0.5;
+      if (flock.x <= 75 || flock.x >= w - 75) flock.vx *= -0.6;
+      if (flock.y <= 75 || flock.y >= h - 75) flock.vy *= -0.6;
     };
 
     const draw = () => {
