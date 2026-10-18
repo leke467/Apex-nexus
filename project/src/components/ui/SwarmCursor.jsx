@@ -269,9 +269,18 @@ const SwarmCursor = ({
     const vy = new Float32Array(MAX_PARTICLES);
     const vz = new Float32Array(MAX_PARTICLES);
     const home = new Float32Array(MAX_PARTICLES);
-    const homeX = new Float32Array(MAX_PARTICLES);
-    const homeY = new Float32Array(MAX_PARTICLES);
     const heft = new Float32Array(MAX_PARTICLES);
+    const flock = {
+      x: 0,
+      y: 0,
+      vx: 0,
+      vy: 0,
+      targetX: 0,
+      targetY: 0,
+      nextTargetTime: 0,
+      scatterTimer: 0,
+      initialized: false,
+    };
     const bob = new Float32Array(MAX_PARTICLES);
     const bobRate = new Float32Array(MAX_PARTICLES);
     const grain = new Float32Array(MAX_PARTICLES);
@@ -366,12 +375,16 @@ const SwarmCursor = ({
     const stir = (s, dt, ease) => {
       const radius = s.spread;
       const reach = radius * 2.2;
-      const i0 = Math.max(1, Math.floor((anchor.x - reach) / cell));
-      const i1 = Math.min(cols - 2, Math.ceil((anchor.x + reach) / cell));
-      const j0 = Math.max(1, Math.floor((anchor.y - reach) / cell));
-      const j1 = Math.min(rows - 2, Math.ceil((anchor.y + reach) / cell));
+      const stirX = s.flee ? flock.x : anchor.x;
+      const stirY = s.flee ? flock.y : anchor.y;
+      const stirMoveX = s.flee ? flock.vx : anchor.moveX;
+      const stirMoveY = s.flee ? flock.vy : anchor.moveY;
+      const i0 = Math.max(1, Math.floor((stirX - reach) / cell));
+      const i1 = Math.min(cols - 2, Math.ceil((stirX + reach) / cell));
+      const j0 = Math.max(1, Math.floor((stirY - reach) / cell));
+      const j1 = Math.min(rows - 2, Math.ceil((stirY + reach) / cell));
       const inv = 1 / (radius * radius * 0.55);
-      const moving = Math.hypot(anchor.moveX, anchor.moveY);
+      const moving = Math.hypot(stirMoveX, stirMoveY);
       const grab = (1 - Math.exp(-dt * 20)) * clamp(moving / 240, 0, 1) * presence;
       const whirl = ring.active ? 0 : radius * (0.5 + 4 * (1 - ease)) * (0.35 + 0.65 * s.speed);
       const churn = s.wander * radius * 14 * (0.4 + 0.6 * s.speed);
@@ -382,14 +395,14 @@ const SwarmCursor = ({
           const k = i + j * cols;
           const x = (i + 0.5) * cell;
           const y = (j + 0.5) * cell;
-          const rx = x - anchor.x;
-          const ry = y - anchor.y;
+          const rx = x - stirX;
+          const ry = y - stirY;
           const d2 = rx * rx + ry * ry;
           const w = Math.exp(-d2 * inv);
           if (w < 0.003) continue;
           const d = Math.sqrt(d2) + 0.001;
-          flowX[k] += (anchor.moveX - flowX[k]) * w * grab;
-          flowY[k] += (anchor.moveY - flowY[k]) * w * grab;
+          flowX[k] += (stirMoveX - flowX[k]) * w * grab;
+          flowY[k] += (stirMoveY - flowY[k]) * w * grab;
           const reachOut = Math.min(1, d / (radius * 0.45));
           flowX[k] += (-ry / d) * whirl * reachOut * w * dt;
           flowY[k] += (rx / d) * whirl * reachOut * w * dt;
@@ -563,29 +576,39 @@ const SwarmCursor = ({
           }
         }
         if (s.flee) {
-          const dx = x - anchor.x;
-          const dy = y - anchor.y;
-          const d = Math.hypot(dx, dy) + 0.001;
-          const fearRadius = radius * 2.8;
-          if (pointer.inside && d < fearRadius) {
-            const q = 1 - d / fearRadius;
-            const fleeForce = q * q * 18000 * (0.6 + 0.4 * s.speed);
-            ax += (dx / d) * fleeForce;
-            ay += (dy / d) * fleeForce;
-            const dot = (anchor.moveX * dx + anchor.moveY * dy) / (d + 1e-4);
-            if (dot > 0) {
-              ax += anchor.moveX * q * 0.5;
-              ay += anchor.moveY * q * 0.5;
+          const dxFlock = flock.x - x;
+          const dyFlock = flock.y - y;
+          const dFlock = Math.hypot(dxFlock, dyFlock) + 0.001;
+          const overFlock = Math.max(0, dFlock - radius);
+
+          // If individual particle is touched or near mouse, burst away
+          if (pointer.inside) {
+            const dxM = x - pointer.x;
+            const dyM = y - pointer.y;
+            const dM = Math.hypot(dxM, dyM) + 0.001;
+            const fearR = radius * 1.5;
+            if (dM < fearR) {
+              const q = 1 - dM / fearR;
+              const fleeForce = q * q * 18000;
+              ax += (dxM / dM) * fleeForce;
+              ay += (dyM / dM) * fleeForce;
             }
-          } else {
-            const homeDx = homeX[i] - x;
-            const homeDy = homeY[i] - y;
-            const homeDist = Math.hypot(homeDx, homeDy) + 0.001;
-            ax += (homeDx / homeDist) * Math.min(homeDist * 0.8, 120);
-            ay += (homeDy / homeDist) * Math.min(homeDist * 0.8, 120);
           }
-          vx[i] *= 0.96;
-          vy[i] *= 0.96;
+
+          // Cohesion force pulling particle into the flock cluster:
+          // When scattered (scatterTimer > 0), cohesion is looser allowing outward burst,
+          // then quickly ramps up to reassemble them tightly at flock position where mouse is not!
+          const scatterFactor = flock.scatterTimer > 0 ? (1 - flock.scatterTimer / 0.9) : 1;
+          const cohesion = 0.25 + 0.75 * scatterFactor;
+          ax += (dxFlock / dFlock) * (dFlock * gather * cohesion + overFlock * pull * cohesion);
+          ay += (dyFlock / dFlock) * (dFlock * gather * cohesion + overFlock * pull * cohesion);
+
+          // Inherit flock cluster momentum so all particles cruise together
+          ax += flock.vx * 0.75;
+          ay += flock.vy * 0.75;
+
+          vx[i] *= 0.97;
+          vy[i] *= 0.97;
         } else if (ring.active) {
           rectField(x - ring.x, y - ring.y, ring.hx, ring.hy, ring.corner, field);
           const e = field[0] - (5 + band * home[i] * home[i]);
@@ -634,18 +657,13 @@ const SwarmCursor = ({
       const s = settingsRef.current;
       const rand = random(11);
       const reachOut = Math.hypot(view.width, view.height) * 0.5;
+      const cx = s.flee ? flock.x : anchor.x;
+      const cy = s.flee ? flock.y : anchor.y;
       for (let i = 0; i < MAX_PARTICLES; i++) {
-        if (s.flee) {
-          px[i] = (0.03 + 0.94 * rand()) * view.width;
-          py[i] = (0.03 + 0.94 * rand()) * view.height;
-          homeX[i] = px[i];
-          homeY[i] = py[i];
-        } else {
-          const a = rand() * Math.PI * 2;
-          const r = gathered ? home[i] * s.spread : (0.35 + 0.65 * Math.sqrt(rand())) * reachOut;
-          px[i] = anchor.x + Math.cos(a) * r;
-          py[i] = anchor.y + Math.sin(a) * r;
-        }
+        const a = rand() * Math.PI * 2;
+        const r = (s.flee || gathered) ? home[i] * s.spread : (0.35 + 0.65 * Math.sqrt(rand())) * reachOut;
+        px[i] = cx + Math.cos(a) * r;
+        py[i] = cy + Math.sin(a) * r;
         pz[i] = Math.sin(bob[i]) * s.spread * 0.55;
         vx[i] = 0;
         vy[i] = 0;
@@ -718,6 +736,108 @@ const SwarmCursor = ({
       anchor.lastX = anchor.x;
       anchor.lastY = anchor.y;
       presence += (goal - presence) * (1 - Math.exp(-dt / 0.25));
+    };
+
+    const updateFlock = (s, dt) => {
+      if (!s.flee) return;
+
+      const w = view.width;
+      const h = view.height;
+      if (!flock.initialized) {
+        flock.x = w * 0.5;
+        flock.y = h * 0.5;
+        flock.targetX = w * 0.5;
+        flock.targetY = h * 0.5;
+        flock.initialized = true;
+      }
+
+      if (flock.scatterTimer > 0) {
+        flock.scatterTimer = Math.max(0, flock.scatterTimer - dt);
+      }
+
+      const mouseX = pointer.inside ? pointer.x : -9999;
+      const mouseY = pointer.inside ? pointer.y : -9999;
+      const dxMouse = flock.x - mouseX;
+      const dyMouse = flock.y - mouseY;
+      const distMouse = Math.hypot(dxMouse, dyMouse);
+
+      // Radii for fear detection and direct touch
+      const fearRadius = s.spread * 2.8;
+      const touchRadius = s.spread * 1.3;
+
+      // 1. DIRECT TOUCH or CLICK: SCATTER & RELOCATE TO A SAFE ZONE
+      if (pointer.inside && distMouse < touchRadius && flock.scatterTimer <= 0) {
+        flock.scatterTimer = 0.9; // scatter duration
+        const scatterBurst = 1200 * (0.8 + 0.4 * s.speed);
+        for (let i = 0; i < s.count; i++) {
+          const pdx = px[i] - mouseX;
+          const pdy = py[i] - mouseY;
+          const pd = Math.hypot(pdx, pdy) + 0.001;
+          if (pd < fearRadius * 1.6) {
+            const force = (1 - pd / (fearRadius * 1.6)) * scatterBurst;
+            vx[i] += (pdx / pd) * force + (Math.random() - 0.5) * 450;
+            vy[i] += (pdy / pd) * force + (Math.random() - 0.5) * 450;
+          }
+        }
+        // Leap to safe quadrant where mouse is not
+        const safeX = mouseX < w * 0.5 ? w * (0.65 + 0.25 * Math.random()) : w * (0.1 + 0.25 * Math.random());
+        const safeY = mouseY < h * 0.5 ? h * (0.65 + 0.25 * Math.random()) : h * (0.1 + 0.25 * Math.random());
+        flock.targetX = safeX;
+        flock.targetY = safeY;
+        flock.vx += (safeX - flock.x) * 2.2;
+        flock.vy += (safeY - flock.y) * 2.2;
+        flock.nextTargetTime = time + 2.5;
+      } 
+      // 2. APPROACHING: MOVE OUT OF ITS WAY TOGETHER
+      else if (pointer.inside && distMouse < fearRadius) {
+        const fear = 1 - (distMouse / fearRadius);
+        const evadeUnitX = dxMouse / (distMouse + 1e-4);
+        const evadeUnitY = dyMouse / (distMouse + 1e-4);
+        const evadeForce = fear * fear * 6000 * (0.6 + 0.4 * s.speed);
+        flock.vx += evadeUnitX * evadeForce * dt;
+        flock.vy += evadeUnitY * evadeForce * dt;
+
+        // Shift target smoothly away from mouse
+        flock.targetX = clamp(flock.x + evadeUnitX * 380, 90, w - 90);
+        flock.targetY = clamp(flock.y + evadeUnitY * 380, 90, h - 90);
+        flock.nextTargetTime = time + 1.8;
+      } 
+      // 3. AMBIENT: CRUISE AND MOVE AROUND TOGETHER
+      else {
+        if (time > flock.nextTargetTime) {
+          flock.nextTargetTime = time + 3.0 + Math.random() * 2.5;
+          const padX = Math.min(140, w * 0.15);
+          const padY = Math.min(140, h * 0.15);
+          let tx, ty;
+          if (pointer.inside) {
+            const angle = Math.atan2(flock.y - mouseY, flock.x - mouseX) + (Math.random() - 0.5) * 1.4;
+            const dist = 220 + Math.random() * 280;
+            tx = clamp(flock.x + Math.cos(angle) * dist, padX, w - padX);
+            ty = clamp(flock.y + Math.sin(angle) * dist, padY, h - padY);
+          } else {
+            tx = padX + Math.random() * (w - 2 * padX);
+            ty = padY + Math.random() * (h - 2 * padY);
+          }
+          flock.targetX = tx;
+          flock.targetY = ty;
+        }
+
+        const toTargetX = flock.targetX - flock.x;
+        const toTargetY = flock.targetY - flock.y;
+        const distTarget = Math.hypot(toTargetX, toTargetY) + 1e-4;
+        const cruiseSpeed = 160 * (0.5 + 0.5 * s.speed);
+        flock.vx += (toTargetX / distTarget) * Math.min(distTarget * 1.8, cruiseSpeed) * dt * 4;
+        flock.vy += (toTargetY / distTarget) * Math.min(distTarget * 1.8, cruiseSpeed) * dt * 4;
+      }
+
+      // Physics damping & integration
+      flock.vx *= Math.exp(-dt * 3.0);
+      flock.vy *= Math.exp(-dt * 3.0);
+      flock.x = clamp(flock.x + flock.vx * dt, 70, w - 70);
+      flock.y = clamp(flock.y + flock.vy * dt, 70, h - 70);
+
+      if (flock.x <= 75 || flock.x >= w - 75) flock.vx *= -0.5;
+      if (flock.y <= 75 || flock.y >= h - 75) flock.vy *= -0.5;
     };
 
     const draw = () => {
@@ -823,6 +943,11 @@ const SwarmCursor = ({
       allocate();
       if (!seeded) {
         seed();
+        flock.x = view.width * 0.5;
+        flock.y = view.height * 0.5;
+        flock.targetX = view.width * 0.5;
+        flock.targetY = view.height * 0.5;
+        flock.initialized = true;
         updateAnchor(s, 0);
         if (reduce) {
           anchor.x = view.width / 2;
@@ -854,6 +979,7 @@ const SwarmCursor = ({
       const ease = introClock * introClock * (3 - 2 * introClock);
       hovered = findTarget();
       updateAnchor(s, dt);
+      updateFlock(s, dt);
       setHidden(s.hideCursor && pointer.inside);
       stir(s, dt, ease);
       flow(s, dt);
@@ -892,6 +1018,18 @@ const SwarmCursor = ({
       const s = settingsRef.current;
       const { x, y, inside } = locate(event);
       if (!inside || !s.enabled || reduce || s.clickEffect === 'none') return;
+      if (s.flee) {
+        const dClick = Math.hypot(flock.x - x, flock.y - y);
+        if (dClick < s.spread * 2.8) {
+          flock.scatterTimer = 0.9;
+          const safeX = x < view.width * 0.5 ? view.width * (0.65 + 0.25 * Math.random()) : view.width * (0.1 + 0.25 * Math.random());
+          const safeY = y < view.height * 0.5 ? view.height * (0.65 + 0.25 * Math.random()) : view.height * (0.1 + 0.25 * Math.random());
+          flock.targetX = safeX;
+          flock.targetY = safeY;
+          flock.vx += (safeX - flock.x) * 2.5;
+          flock.vy += (safeY - flock.y) * 2.5;
+        }
+      }
       const reachOut = s.spread * 2.2;
       if (s.clickEffect === 'pulse') {
         ping.x = x;
