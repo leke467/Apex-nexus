@@ -31,7 +31,7 @@ function Home() {
         size={2.8}
         spread={85}
         swirl={0.65}
-        speed={1.85}
+        speed={1.2}
         tail={0.15}
         trail={0.5}
         intro={false}
