@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from '../context/ThemeContext';
+import SwarmCursor from '../components/ui/SwarmCursor';
 import HeroSection from '../components/home/HeroSection';
 import ServicesSection from '../components/home/ServicesSection';
 import ProjectsShowcase from '../components/home/ProjectsShowcase';
@@ -21,7 +22,23 @@ function Home() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      className="relative"
     >
+      <SwarmCursor
+        fixed
+        count={850}
+        size={2.6}
+        spread={80}
+        swirl={0.6}
+        speed={1.5}
+        tail={0.15}
+        trail={0.5}
+        intro={false}
+        idle="gather"
+        color="#38bdf8"
+        accentColor="#818cf8"
+        clickEffect="burst"
+      />
       <HeroSection />
       <ServicesSection />
       <ProjectsShowcase />

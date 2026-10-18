@@ -143,6 +143,7 @@ const rectField = (x, y, hx, hy, r, out) => {
 };
 
 const SwarmCursor = ({
+  fixed = false,
   count = 800,
   size = 2.6,
   shape = 'dot',
@@ -173,6 +174,7 @@ const SwarmCursor = ({
   const wakeRef = useRef(null);
   const ink = lightMode ? '#18181b' : '#ffffff';
   const settings = {
+    fixed,
     count: Math.round(clamp(count, 1, MAX_PARTICLES)),
     size: clamp(size, 0.5, 16),
     shape: SHAPES[shape] ?? 0,
@@ -619,16 +621,22 @@ const SwarmCursor = ({
     const findTarget = () => {
       const s = settingsRef.current;
       if (!s.targets || !pointer.inside) return null;
-      const rect = container.getBoundingClientRect();
-      const element = document.elementFromPoint(rect.left + pointer.x, rect.top + pointer.y);
-      if (!element || !container.contains(element)) return null;
+      let element;
+      if (s.fixed) {
+        element = document.elementFromPoint(pointer.x, pointer.y);
+      } else {
+        const rect = container.getBoundingClientRect();
+        element = document.elementFromPoint(rect.left + pointer.x, rect.top + pointer.y);
+        if (!element || !container.contains(element)) return null;
+      }
+      if (!element) return null;
       let match = null;
       try {
         match = element.closest(s.targets);
       } catch {
         match = null;
       }
-      return match && container.contains(match) ? match : null;
+      return match && (s.fixed || container.contains(match)) ? match : null;
     };
 
     const updateAnchor = (s, dt) => {
@@ -636,7 +644,7 @@ const SwarmCursor = ({
       const h = view.height;
       if (hovered && hovered.isConnected) {
         const box = hovered.getBoundingClientRect();
-        const frame = container.getBoundingClientRect();
+        const frame = s.fixed ? { left: 0, top: 0 } : container.getBoundingClientRect();
         const radius = parseFloat(getComputedStyle(hovered).borderTopLeftRadius) || 0;
         ring.x = box.left - frame.left + box.width / 2;
         ring.y = box.top - frame.top + box.height / 2;
@@ -770,8 +778,10 @@ const SwarmCursor = ({
 
     const resize = () => {
       const s = settingsRef.current;
-      view.width = Math.max(1, container.clientWidth);
-      view.height = Math.max(1, container.clientHeight);
+      const w = s.fixed ? window.innerWidth : Math.max(1, container.clientWidth);
+      const h = s.fixed ? window.innerHeight : Math.max(1, container.clientHeight);
+      view.width = Math.max(1, w);
+      view.height = Math.max(1, h);
       view.ratio = Math.min(s.dpr || window.devicePixelRatio || 1, 2);
       canvas.width = Math.max(1, Math.round(view.width * view.ratio));
       canvas.height = Math.max(1, Math.round(view.height * view.ratio));
@@ -823,6 +833,13 @@ const SwarmCursor = ({
     }
 
     const locate = event => {
+      const s = settingsRef.current;
+      if (s.fixed) {
+        const x = event.clientX;
+        const y = event.clientY;
+        const inside = x >= 0 && y >= 0 && x <= window.innerWidth && y <= window.innerHeight;
+        return { x, y, inside };
+      }
       const rect = container.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
@@ -899,10 +916,15 @@ const SwarmCursor = ({
       }
     });
     intersection.observe(container);
+    const onScroll = () => {
+      wake();
+    };
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('pointerdown', onPointerDown, { passive: true });
     window.addEventListener('pointerup', onPointerUp, { passive: true });
     window.addEventListener('pointercancel', onPointerUp, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', resize);
     document.documentElement.addEventListener('pointerleave', onPointerLeave);
     document.addEventListener('visibilitychange', onVisibility);
     resize();
@@ -918,6 +940,8 @@ const SwarmCursor = ({
       window.removeEventListener('pointerdown', onPointerDown);
       window.removeEventListener('pointerup', onPointerUp);
       window.removeEventListener('pointercancel', onPointerUp);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', resize);
       document.documentElement.removeEventListener('pointerleave', onPointerLeave);
       document.removeEventListener('visibilitychange', onVisibility);
       gl.deleteBuffer(cornerBuffer);
@@ -935,7 +959,12 @@ const SwarmCursor = ({
   });
 
   return (
-    <div ref={containerRef} className={`swarm-cursor${className ? ` ${className}` : ''}`} style={style} {...rest}>
+    <div
+      ref={containerRef}
+      className={`${fixed ? 'swarm-cursor-fixed' : 'swarm-cursor'}${className ? ` ${className}` : ''}`}
+      style={style}
+      {...rest}
+    >
       <style>{`.${HIDDEN}, .${HIDDEN} * { cursor: none !important; }`}</style>
       <canvas ref={canvasRef} className="swarm-cursor-canvas" aria-hidden="true" />
       {children ? <div className="swarm-cursor-content">{children}</div> : null}

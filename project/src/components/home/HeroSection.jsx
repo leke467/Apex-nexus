@@ -12,7 +12,6 @@ import {
   FiGlobe
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import SwarmCursor from '../ui/SwarmCursor';
 
 const tabs = [
   {
@@ -82,7 +81,7 @@ function HeroSection() {
   const currentTab = tabs.find((t) => t.id === activeTab) || tabs[0];
 
   return (
-    <section className="min-h-screen relative flex items-center justify-center overflow-hidden">
+    <section className="min-h-screen relative flex items-center justify-center overflow-hidden py-24 lg:py-32">
       {/* Background radial gradient & subtle grid */}
       <div className="absolute inset-0 hero-gradient pointer-events-none"></div>
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
@@ -91,23 +90,8 @@ function HeroSection() {
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-primary-500/15 rounded-full blur-[140px] pointer-events-none"></div>
       <div className="absolute bottom-1/4 right-10 w-[400px] h-[300px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
-      <SwarmCursor
-        count={850}
-        size={2.6}
-        spread={80}
-        swirl={0.6}
-        speed={1.5}
-        tail={0.15}
-        trail={0.5}
-        intro={false}
-        idle="gather"
-        color="#38bdf8"
-        accentColor="#818cf8"
-        clickEffect="burst"
-        className="w-full min-h-screen flex items-center justify-center py-24 lg:py-32"
-      >
-        <div className="container-custom relative z-10 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="container-custom relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           
           {/* Left Column: Value Proposition & CTAs */}
           <motion.div
@@ -319,7 +303,6 @@ function HeroSection() {
 
         </div>
       </div>
-      </SwarmCursor>
     </section>
   );
 }
