@@ -144,6 +144,7 @@ const rectField = (x, y, hx, hy, r, out) => {
 
 const SwarmCursor = ({
   fixed = false,
+  flee = false,
   count = 800,
   size = 2.6,
   shape = 'dot',
@@ -175,6 +176,7 @@ const SwarmCursor = ({
   const ink = lightMode ? '#18181b' : '#ffffff';
   const settings = {
     fixed,
+    flee,
     count: Math.round(clamp(count, 1, MAX_PARTICLES)),
     size: clamp(size, 0.5, 16),
     shape: SHAPES[shape] ?? 0,
@@ -267,6 +269,8 @@ const SwarmCursor = ({
     const vy = new Float32Array(MAX_PARTICLES);
     const vz = new Float32Array(MAX_PARTICLES);
     const home = new Float32Array(MAX_PARTICLES);
+    const homeX = new Float32Array(MAX_PARTICLES);
+    const homeY = new Float32Array(MAX_PARTICLES);
     const heft = new Float32Array(MAX_PARTICLES);
     const bob = new Float32Array(MAX_PARTICLES);
     const bobRate = new Float32Array(MAX_PARTICLES);
@@ -558,7 +562,31 @@ const SwarmCursor = ({
             }
           }
         }
-        if (ring.active) {
+        if (s.flee) {
+          const dx = x - anchor.x;
+          const dy = y - anchor.y;
+          const d = Math.hypot(dx, dy) + 0.001;
+          const fearRadius = radius * 2.8;
+          if (pointer.inside && d < fearRadius) {
+            const q = 1 - d / fearRadius;
+            const fleeForce = q * q * 18000 * (0.6 + 0.4 * s.speed);
+            ax += (dx / d) * fleeForce;
+            ay += (dy / d) * fleeForce;
+            const dot = (anchor.moveX * dx + anchor.moveY * dy) / (d + 1e-4);
+            if (dot > 0) {
+              ax += anchor.moveX * q * 0.5;
+              ay += anchor.moveY * q * 0.5;
+            }
+          } else {
+            const homeDx = homeX[i] - x;
+            const homeDy = homeY[i] - y;
+            const homeDist = Math.hypot(homeDx, homeDy) + 0.001;
+            ax += (homeDx / homeDist) * Math.min(homeDist * 0.8, 120);
+            ay += (homeDy / homeDist) * Math.min(homeDist * 0.8, 120);
+          }
+          vx[i] *= 0.96;
+          vy[i] *= 0.96;
+        } else if (ring.active) {
           rectField(x - ring.x, y - ring.y, ring.hx, ring.hy, ring.corner, field);
           const e = field[0] - (5 + band * home[i] * home[i]);
           const hold = e > 0 ? 70 : 140;
@@ -572,11 +600,11 @@ const SwarmCursor = ({
           ax += (dx / d) * (d * gather + over * pull);
           ay += (dy / d) * (d * gather + over * pull);
         }
-        if (introClock >= 1) {
-          if (x < 8) ax += (8 - x) * 30;
-          else if (x > w - 8) ax -= (x - w + 8) * 30;
-          if (y < 8) ay += (8 - y) * 30;
-          else if (y > h - 8) ay -= (y - h + 8) * 30;
+        if (s.flee || introClock >= 1) {
+          if (x < 16) ax += (16 - x) * 35;
+          else if (x > w - 16) ax -= (x - w + 16) * 35;
+          if (y < 16) ay += (16 - y) * 35;
+          else if (y > h - 16) ay -= (y - h + 16) * 35;
         }
         const lift = Math.sin(time * bobRate[i] + bob[i]) * radius * (ring.active ? 0.15 : 0.55);
         const az = (lift - pz[i]) * 36 - vz[i] * 9;
@@ -607,10 +635,17 @@ const SwarmCursor = ({
       const rand = random(11);
       const reachOut = Math.hypot(view.width, view.height) * 0.5;
       for (let i = 0; i < MAX_PARTICLES; i++) {
-        const a = rand() * Math.PI * 2;
-        const r = gathered ? home[i] * s.spread : (0.35 + 0.65 * Math.sqrt(rand())) * reachOut;
-        px[i] = anchor.x + Math.cos(a) * r;
-        py[i] = anchor.y + Math.sin(a) * r;
+        if (s.flee) {
+          px[i] = (0.03 + 0.94 * rand()) * view.width;
+          py[i] = (0.03 + 0.94 * rand()) * view.height;
+          homeX[i] = px[i];
+          homeY[i] = py[i];
+        } else {
+          const a = rand() * Math.PI * 2;
+          const r = gathered ? home[i] * s.spread : (0.35 + 0.65 * Math.sqrt(rand())) * reachOut;
+          px[i] = anchor.x + Math.cos(a) * r;
+          py[i] = anchor.y + Math.sin(a) * r;
+        }
         pz[i] = Math.sin(bob[i]) * s.spread * 0.55;
         vx[i] = 0;
         vy[i] = 0;

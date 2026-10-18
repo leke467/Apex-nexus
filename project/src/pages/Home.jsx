@@ -26,11 +26,12 @@ function Home() {
     >
       <SwarmCursor
         fixed
-        count={850}
-        size={2.6}
-        spread={80}
-        swirl={0.6}
-        speed={1.5}
+        flee
+        count={750}
+        size={2.8}
+        spread={85}
+        swirl={0.65}
+        speed={1.6}
         tail={0.15}
         trail={0.5}
         intro={false}
