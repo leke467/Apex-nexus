@@ -92,11 +92,15 @@ function HeroSection() {
       <div className="absolute bottom-1/4 right-10 w-[400px] h-[300px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none"></div>
 
       <SwarmCursor
-        count={800}
+        count={850}
         size={2.6}
-        spread={90}
+        spread={80}
         swirl={0.6}
-        speed={1}
+        speed={1.5}
+        tail={0.15}
+        trail={0.5}
+        intro={false}
+        idle="gather"
         color="#38bdf8"
         accentColor="#818cf8"
         clickEffect="burst"
